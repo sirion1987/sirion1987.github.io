@@ -1,6 +1,6 @@
 baseurl: ""
-url: "/"
+url: "/public"
 source: "src"
-# destination: "public"
+destination: "public"
 theme: jekyll-theme-cayman
 title: Welcome to the Sirion's homepage!
