@@ -1,1 +1,22 @@
-.sidebar__title
+.sidebar__menu
+  margin-bottom: 20px
+
+  li
+    a
+      text-decoration: none
+      display: block
+      padding-left: 20px
+      position: relative
+
+      &:before
+        content: ""
+        position: absolute
+        left: 0
+        top: 50%
+        margin-top: -6px
+        height: 12px
+        width: 12px
+        background: url('https://cdn.rawgit.com/encharm/Font-Awesome-SVG-PNG/master/black/svg/chevron-right.svg')
+        background-position: 50% 50%
+        background-repeat: no-repeat
+        background-size: contain

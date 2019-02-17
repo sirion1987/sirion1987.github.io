@@ -1,11 +1,24 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <link rel="stylesheet" href="/assets/css/style.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{site.title}}</title>
   </head>
   <body>
-    {{content}}
+    <div class="container">
+      <div class="container__sidebar">
+        <div class="sidebar">
+          <ul class="sidebar__menu">
+            <li><a href="/">Home</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container__body">
+        {{content}}
+      </div>
+    </div>
   </body>
 </html>
