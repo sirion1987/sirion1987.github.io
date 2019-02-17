@@ -1,5 +1,2 @@
-baseurl: ""
-url: "/public"
-destination: "public"
 theme: jekyll-theme-cayman
 title: Welcome to the Sirion's homepage!
