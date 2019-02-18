@@ -4,3 +4,5 @@ subtitle: Diario di bordo
 sass:
   style: compact
   sass_dir: _sass
+
+theme: jekyll-theme-slate
