@@ -1,5 +1,21 @@
-.sidebar__title
+.sidebar__icon
+  display: flex
+
+.sidebar__icon__image
+  display:block
   margin-bottom: 20px
+  background: url('https://en.gravatar.com/userimage/152678648/8568aa52ee3fecfc4309af1438e889ef?size=200')
+  background-repeat: no-repeat
+  background-size: contain
+  height: 65px
+  width: 65px
+  border-radius: 50%
+
+.sidebar__icon__title
+  flex: 1
+  margin-bottom: 20px
+  margin-left: 20px
+  align-self: center
 
   a
     font-size: 18px
@@ -8,7 +24,11 @@
     text-decoration: none
     color: $dark-body-color
 
+.sidebar__icon__subtitle
+  font-weight: 100
+
 .sidebar__menu
+  padding: 20px
   margin-bottom: 20px
 
   li
