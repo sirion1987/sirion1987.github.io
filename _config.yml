@@ -1,6 +1,9 @@
 title: "@sirion1987"
 subtitle: Diario di bordo
 
+tag_page_layout: tag_page
+tag_page_dir: tag
+
 sass:
   style: compact
   sass_dir: _sass

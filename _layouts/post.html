@@ -9,4 +9,11 @@ layout: default
 
 <br>
 
+<div>
+  Tags:
+  {% for tag in page.tags %}
+    {{ tag | tag_link }}
+  {% endfor %}
+</div>
+
 <a href="/posts">Torna alla index</a>

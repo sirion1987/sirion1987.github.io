@@ -2,8 +2,10 @@
 layout: default
 ---
 
+<h2>{{ page.tag }}</h2>
+
 <div class="posts">
-  {% for post in site.posts %}
+  {% for post in page.posts %}
     <div class="post__item">
       <figure class="card">
         <a href="{{ post.url }}" class="card__image">
@@ -20,4 +22,8 @@ layout: default
       </figure>
     </div>
   {% endfor %}
+</div>
+
+<div id="tag-cloud">
+  {{ site | tag_cloud }}
 </div>
