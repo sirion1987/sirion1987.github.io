@@ -1,4 +1,7 @@
 source "https://rubygems.org"
 
 gem "jekyll"
-gem "jekyll-tagging"
+
+group :jekyll_plugins do
+  gem "jekyll-tagging"
+end
