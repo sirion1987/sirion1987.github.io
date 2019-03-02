@@ -10,3 +10,5 @@ sass:
 
 plugins:
   - jekyll/tagging
+
+safe: false
