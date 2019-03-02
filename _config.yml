@@ -10,3 +10,5 @@ sass:
 
 plugins:
   - jekyll-tagging
+
+gems: [jekyll-tagging]
