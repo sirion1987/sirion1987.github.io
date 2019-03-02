@@ -7,3 +7,6 @@ tag_page_dir: tag
 sass:
   style: compact
   sass_dir: _sass
+
+plugins:
+  - jekyll-tagging
