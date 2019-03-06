@@ -5,7 +5,8 @@ layout: default
 <article class="post">
   <div class="post__inner">
     <h1 class="post__title">{{ page.title }}</h1>
-    <p class="post__lead"{{ page.preview }}></p>
+    <p class="post__date">{{ page.date | date_to_string }}</p>
+    <p class="post__lead">{{ page.preview }}</p>
     <div class="post__body">
       {{ page.content }}
     </div>
