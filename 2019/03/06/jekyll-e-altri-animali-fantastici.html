@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>@sirion1987</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="container__sidebar">
+        <div class="sidebar">
+          <div class="sidebar__icon">
+            <div class="sidebar__icon__image"></div>
+            <h6 class="sidebar__icon__title">
+              <a href="/">@sirion1987</a>
+              <p class="sidebar__icon__subtitle">Diario di bordo</p>
+            </h6>
+          </div>
+          <ul class="sidebar__menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts">Post</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container__body">
+        <article class="post">
+  <div class="post__inner">
+    <h1 class="post__title">Jekyll, GitHub page e altri animali fantastici</h1>
+    <p class="post__date">06 Mar 2019</p>
+    <p class="post__lead">Una breve raccolta di risorse online per creare un template in Jekyll</p>
+    <div class="post__body">
+      <p>Durante la costruzione di questo blog ho trovato alcune risorse utili
+che mi hanno permesso di risolvere alcuni problemi. Questo sito è
+ospitato su <a href="https://pages.github.com/">GitHub Pages</a> e dunque è soggetto
+ad alcune limitazioni, come ad esempio l’uso di alcuni plugin.</p>
+
+<h2 id="dipendenze-per-pages-github">Dipendenze per Pages GitHub</h2>
+
+<p>Prima di inserire un plugin all’interno del file <code class="highlighter-rouge">_conf</code> assicuratevi
+che quest’ultimo sia supportato da Pages GitHub. In questo
+<a href="https://pages.github.com/versions/">link</a> troverai la lista completa.</p>
+
+<h2 id="le-pagine-github-e-i-plugin-di-jekyll">Le pagine GitHub e i plugin di Jekyll</h2>
+
+<p>Cosa fare quando abbiamo bisogno di plugin che non sono supportati da Pages
+GitHub? Ad esempio, durante la costruzione di questo blog mi sono imbattuto
+con <code class="highlighter-rouge">jekyll-tagging</code>, utile per poter etichettare gli articoli.</p>
+
+<p>Come si può saltare questo ostacolo? L’idea principale è questa: quando
+si effettua una build si genera un sito html pronto all’uso sotto la
+cartella <code class="highlighter-rouge">_site</code>. Dunque è sufficiente inizializzare il branch master
+su quest’ultima e creare un un branch per la cartella principale. In
+questo modo sul branch master sarà presente sempre la build e sul
+branch il codice sorgente.</p>
+
+<p>Per ulteriori dettagli vi rimando a questo <a href="https://www.drewsilcock.co.uk/custom-jekyll-plugins">link</a>
+che spiega in ogni dettaglio la procudura descritta in precedenza.</p>
+
+<h2 id="plugin-jekyll">Plugin Jekyll</h2>
+
+<ul>
+  <li>Tagging
+    <ul>
+      <li><a href="https://github.com/pattex/jekyll-tagging">https://github.com/pattex/jekyll-tagging</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="forzare-lesecuzione-di-una-build">Forzare l’esecuzione di una build</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ curl \
+   -u &lt;user&gt;:&lt;development_access_token&gt; \
+   -X POST https://api.github.com/repos/&lt;github_user&gt;/&lt;pages&gt;.github.io/pages/builds \
+   -H "Accept: application/vnd.github.mister-fantastic-preview+json"
+</code></pre></div></div>
+
+<h2 id="kramdown">Kramdown</h2>
+
+<ul>
+  <li><a href="https://kramdown.gettalong.org/quickref.html">Riferimenti</a></li>
+  <li><a href="https://bnhr.xyz/2017/03/25/add-syntax-highlighting-to-your-jekyll-site-with-rouge.html">Come evidenziare la sintassi con Rouge</a></li>
+</ul>
+
+<h2 id="latex">LaTeX</h2>
+
+<p>Volete inserire formule matematiche o altri oggetti meravigliosi?</p>
+
+<ul>
+  <li><a href="https://docs.mathjax.org/en/latest/start.html">https://docs.mathjax.org/en/latest/start.html</a></li>
+</ul>
+
+    </div>
+  </div>
+  <div>
+    Tags:
+    
+    <a href="/tag/jekyll.html">jekyll</a>
+    
+    <a href="/tag/github-page.html">github-page</a>
+    
+  </div>
+
+  <a href="/posts">Torna alla index</a>
+</article>
+
+      </div>
+    </div>
+  </body>
+</html>
