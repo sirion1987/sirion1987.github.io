@@ -1,5 +1,7 @@
 title: "@sirion1987"
 subtitle: Diario di bordo
+markdown: kramdown
+highlighter: rouge
 
 tag_page_layout: tag_page
 tag_page_dir: tag
