@@ -42,7 +42,7 @@ body { font-family: Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-
 @media screen and (min-width: 1100px) { .post__item { padding-left: 40px; } }
 .post { padding: 40px 20px; background-color: white; min-height: 100%; }
 
-.post__inner { max-width: 600px; }
+.post__inner { max-width: 600px; padding: 40px; }
 
 .post__title { font-size: 30px; margin-bottom: 30px; font-weight: bold; color: #000; line-height: 1; }
 
@@ -61,6 +61,8 @@ body { font-family: Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-
 .post__body ol li { list-style-type: decimal; }
 .post__body ul li { list-style-type: disc; }
 .post__body blockquote { border-left: 4px solid #9055a2; font-size: 1.1em; padding: 20px; }
+.post__body p { text-align: justify; }
+.post__body code { font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px; }
 
 @media screen and (min-width: 900px) { .post { padding: 0 60px; }
   .post__title { font-size: 48px; }
@@ -80,3 +82,32 @@ body { font-family: Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-
 .sidebar__menu { padding: 20px; margin-bottom: 20px; }
 .sidebar__menu li a { text-decoration: none; display: block; padding-left: 20px; position: relative; color: #000; }
 .sidebar__menu li a:before { content: ""; position: absolute; left: 0; top: 50%; margin-top: -6px; height: 12px; width: 12px; background: url("https://cdn.rawgit.com/encharm/Font-Awesome-SVG-PNG/master/black/svg/chevron-right.svg"); background-position: 50% 50%; background-repeat: no-repeat; background-size: contain; }
+
+.highlight { color: #f8f8f2; background-color: #49483e; padding: 5px; margin-bottom: 20px; }
+.highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1 { color: #75715e; font-style: italic; }
+.highlight .cp { color: #75715e; font-weight: bold; }
+.highlight .cs { color: #75715e; font-weight: bold; font-style: italic; }
+.highlight .err { color: #960050; background-color: #1e0010; }
+.highlight .gi { color: #ffffff; background-color: #324932; }
+.highlight .gd { color: #ffffff; background-color: #493131; }
+.highlight .ge { color: #000000; font-style: italic; }
+.highlight .gr, .highlight .gt { color: #aa0000; }
+.highlight .gh { color: #999999; }
+.highlight .go { color: #888888; }
+.highlight .gp { color: #555555; }
+.highlight .gs { font-weight: bold; }
+.highlight .gu { color: #aaaaaa; }
+.highlight .k, .highlight .kv, .highlight .kc, .highlight .kd, .highlight .kp, .highlight .kr, .highlight .kt { color: #66d9ef; font-weight: bold; }
+.highlight .kn, .highlight .ow, .highlight .o { color: #f92672; font-weight: bold; }
+.highlight .mf, .highlight .mh, .highlight .il, .highlight .mi, .highlight .mo, .highlight .m, .highlight .mb, .highlight .mx, .highlight .se { color: #ae81ff; }
+.highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr, .highlight .s1, .highlight .ss, .highlight .s { color: #e6db74; }
+.highlight .na { color: #a6e22e; }
+.highlight .nc, .highlight .nd, .highlight .ne, .highlight .nf { color: #a6e22e; font-weight: bold; }
+.highlight .no { color: #66d9ef; }
+.highlight .bp, .highlight .nb, .highlight .ni, .highlight .nn, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .nv, .highlight .w { color: #f8f8f2; }
+.highlight .nl { color: #f8f8f2; font-weight: bold; }
+.highlight .nt { color: #f92672; }
+
+.highlighter-rouge { background-color: #e6e6e6; color: black; padding-left: 3px; padding-right: 3px; }
