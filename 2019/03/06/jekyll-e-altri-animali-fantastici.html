@@ -8,30 +8,34 @@
     <title>@sirion1987</title>
   </head>
   <body>
-    <div class="container">
-      <div class="container__sidebar">
-        <div class="sidebar">
-          <div class="sidebar__icon">
-            <div class="sidebar__icon__image"></div>
-            <h6 class="sidebar__icon__title">
-              <a href="/">@sirion1987</a>
-              <p class="sidebar__icon__subtitle">Diario di bordo</p>
-            </h6>
-          </div>
-          <ul class="sidebar__menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="/posts">Post</a></li>
-          </ul>
-        </div>
+    <header>
+      <nav class="navbar is-expanded is-transparent is-light">
+  <div class="navbar-brand">
+    <span class="navbar-burger" data-target="NavBarMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+  </div>
+  <div class="navbar-menu" id="NavBarMenu">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <a class="link" href="/">Home</a>
       </div>
-      <div class="container__body">
-        <article class="post">
-  <div class="post__inner">
-    <h1 class="post__title">Jekyll, GitHub page e altri animali fantastici</h1>
-    <p class="post__date">06 Mar 2019</p>
-    <p class="post__lead">Una breve raccolta di risorse online per creare un template in Jekyll</p>
-    <div class="post__body">
-      <p>Durante la costruzione di questo blog ho trovato alcune risorse utili
+      <div class="navbar-item">
+        <a class="link" href="/posts">Post</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    </header>
+    <main>
+      <section class="section">
+  <div class="container">
+    <div class="title">Jekyll, GitHub page e altri animali fantastici</div>
+    <div class="subtitle">06 Mar 2019</div>
+    <div class="content is-medium has-text-justified"> <p>Durante la costruzione di questo blog ho trovato alcune risorse utili
 che mi hanno permesso di risolvere alcuni problemi. Questo sito è
 ospitato su <a href="https://pages.github.com/">GitHub Pages</a> e dunque è soggetto
 ad alcune limitazioni, come ad esempio l’uso di alcuni plugin.</p>
@@ -90,22 +94,21 @@ che spiega in ogni dettaglio la procudura descritta in precedenza.</p>
 <ul>
   <li><a href="https://docs.mathjax.org/en/latest/start.html">https://docs.mathjax.org/en/latest/start.html</a></li>
 </ul>
-
-    </div>
+</div>
   </div>
-  <div>
+</section>
+
+<section class="section">
+  <div class="container">
     Tags:
     
-    <a href="/tag/jekyll.html">jekyll</a>
+    <span class="tag is-warning is-medium">#<a href="/tag/jekyll.html">jekyll</a></span>
     
-    <a href="/tag/github-page.html">github-page</a>
+    <span class="tag is-warning is-medium">#<a href="/tag/github-page.html">github-page</a></span>
     
   </div>
+</section>
 
-  <a href="/posts">Torna alla index</a>
-</article>
-
-      </div>
-    </div>
+    </main>
   </body>
 </html>

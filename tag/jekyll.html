@@ -8,24 +8,30 @@
     <title>@sirion1987</title>
   </head>
   <body>
-    <div class="container">
-      <div class="container__sidebar">
-        <div class="sidebar">
-          <div class="sidebar__icon">
-            <div class="sidebar__icon__image"></div>
-            <h6 class="sidebar__icon__title">
-              <a href="/">@sirion1987</a>
-              <p class="sidebar__icon__subtitle">Diario di bordo</p>
-            </h6>
-          </div>
-          <ul class="sidebar__menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="/posts">Post</a></li>
-          </ul>
-        </div>
+    <header>
+      <nav class="navbar is-expanded is-transparent is-light">
+  <div class="navbar-brand">
+    <span class="navbar-burger" data-target="NavBarMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+  </div>
+  <div class="navbar-menu" id="NavBarMenu">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <a class="link" href="/">Home</a>
       </div>
-      <div class="container__body">
-        <h2>jekyll</h2>
+      <div class="navbar-item">
+        <a class="link" href="/posts">Post</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    </header>
+    <main>
+      <h2>jekyll</h2>
 
 <div class="posts">
   
@@ -51,7 +57,6 @@
   <a href="/tag/github-page.html" class="set-5">github-page</a> <a href="/tag/jekyll.html" class="set-5">jekyll</a>
 </div>
 
-      </div>
-    </div>
+    </main>
   </body>
 </html>
