@@ -4,26 +4,23 @@ layout: default
 
 <h2>{{ page.tag }}</h2>
 
-<div class="posts">
-  {% for post in page.posts %}
-    <div class="post__item">
-      <figure class="card">
-        <a href="{{ post.url }}" class="card__image">
-          <img src="{{ post.cover_image }}">
-        </a>
-        <figcaption class="card__caption">
-          <h6 class="card__title">
-            <a href="{{ post.url }}">{{ post.title }}</a>
-          </h6>
-          <div class="card__description">
-            <p>{{ post.preview }}</p>
-          </div>
-        </figcaption>
-      </figure>
+<section class="section">
+  <div class="columns is-multiline">
+    {% for post in site.posts %}
+    <div class="column is-one-quarter-desktop is-one-third-tablet">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image">
+            <img src="{{ post.cover_image }}">
+          </figure>
+        </div>
+        <div class="card-content">
+          <a class="title is-4" href="{{ post.url }}">{{ post.title }}</a>
+          <br><br>
+          <p class="has-text-justified"> {{ post.preview }}</p>
+        </div>
+      </div>
     </div>
-  {% endfor %}
-</div>
-
-<div id="tag-cloud">
-  {{ site | tag_cloud }}
-</div>
+    {% endfor %}
+  </div>
+</section>
