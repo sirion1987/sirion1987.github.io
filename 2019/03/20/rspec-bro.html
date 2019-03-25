@@ -38,11 +38,20 @@
     <div class="content is-medium has-text-justified"> <p>Un proverbio dice che chi parte bene è a metà dell’opera. Nulla di più
 vero quando si tratta di dover configurare RSpec da zero. Questa guida
 vuole essere una raccolta di best practice per quanto riguarda il
-bootstrap iniziale di questo framework di test.</p>
+bootstrap iniziale di questo framework di test. Inoltre, verranno
+presentate delle librerie di supporto che permettono di facilitare
+operazioni che altrimenti sarebbero state molto onerose, come ad
+esempio la pulizia del database, il linter, il mocking di richieste
+HTTP, etc. Ovviamente ognuna di esse ha senso in un determinato contesto:
+se ad esempio il nostro progetto non interagisce con il mondo esterno
+la gemma WebMock o VCR non ha necessità di essere né installata né
+configurata. In questo senso la configurazione di ognuna è stata
+volutamente modulare.</p>
 
 <h1 id="gemfile">Gemfile</h1>
 
-<p>Se state utilizzando <strong>Rails on Rails</strong> è sufficiente specificare quanto segue</p>
+<p>Se state utilizzando <strong>Ruby on Rails</strong> è sufficiente specificare quanto
+segue:</p>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Gemfile</span>
 
@@ -88,7 +97,7 @@ genererà in automatico alcuni file di configurazione:</p>
 <ol>
   <li>
     <p><code class="highlighter-rouge">.rspec</code>: è un file di configurazione dei parametri passati
-automaticamente al comando <code class="highlighter-rouge">rspec</code>. I “must have” sono i seguenti:</p>
+automaticamente al comando <code class="highlighter-rouge">rspec</code>. Le opzioni consigliate sono:</p>
 
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  --color
   --format documentation
@@ -126,7 +135,7 @@ Fornisce degli helper per facilitare i test</li>
 di analisi della copertura del codice sorgente</li>
   <li><a href="https://github.com/bblimke/webmock">Webmock</a>:
 Utilizzato per lo stub delle richieste HTTP</li>
-  <li><a href="https://github.com/vcr/vcr">Vcr</a>: Registra le iterazioni HTTP durante
+  <li><a href="https://github.com/vcr/vcr">Vcr</a>: Registra le interazioni HTTP durante
 i test riproponendo le risposte in un secondo momento. In questo modo
 si velocizzano i test che necessitano di dialogare con il mondo
 esterno.</li>
@@ -145,7 +154,7 @@ esterno.</li>
 <span class="n">group</span> <span class="ss">:test</span> <span class="k">do</span>
   <span class="n">gem</span> <span class="s2">"database_cleaner"</span>
   <span class="n">gem</span> <span class="s2">"shoulda-matchers"</span>
-  <span class="n">gem</span> <span class="s2">"simplecov"</span><span class="p">,</span> <span class="ss">require: </span><span class="kp">false</span>
+  <span class="n">gem</span> <span class="s2">"simplecov"</span>
   <span class="n">gem</span> <span class="s2">"vcr"</span>
   <span class="n">gem</span> <span class="s2">"webmock"</span>
 <span class="k">end</span>
@@ -154,9 +163,7 @@ esterno.</li>
 
 <h2 id="specspec_helperrb">spec/spec_helper.rb</h2>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"simplecov"</span>
-
-<span class="no">RSpec</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">RSpec</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
   <span class="n">config</span><span class="p">.</span><span class="nf">expect_with</span> <span class="ss">:rspec</span> <span class="k">do</span> <span class="o">|</span><span class="n">expectations</span><span class="o">|</span>
     <span class="n">expectations</span><span class="p">.</span><span class="nf">include_chain_clauses_in_custom_matcher_descriptions</span> <span class="o">=</span> <span class="kp">true</span>
     <span class="n">expectations</span><span class="p">.</span><span class="nf">syntax</span> <span class="o">=</span> <span class="ss">:expect</span>
@@ -205,8 +212,9 @@ esterno.</li>
 
 <h1 id="configurazione-delle-gemme">Configurazione delle gemme</h1>
 
-<p>Creiamo la cartella <code class="highlighter-rouge">spec/support</code> e configuriamo in un file separato
-ogni libreria.</p>
+<p>Ogni libreria è stata configurata in un proprio file in modo tale da
+facilitare la lettura. Per convenzione, la directory incaricata di
+contenere le varie configurazioni è <code class="highlighter-rouge">spec/support</code>.</p>
 
 <h2 id="databasecleaner--lint-factorybot">DatabaseCleaner / Lint FactoryBot</h2>
 
