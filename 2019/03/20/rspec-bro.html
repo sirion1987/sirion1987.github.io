@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>@sirion1987</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar is-expanded is-transparent is-light">
+  <div class="navbar-brand">
+    <span class="navbar-burger" data-target="NavBarMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+  </div>
+  <div class="navbar-menu" id="NavBarMenu">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <a class="link" href="/">Home</a>
+      </div>
+      <div class="navbar-item">
+        <a class="link" href="/posts">Post</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    </header>
+    <main>
+      <section class="section">
+  <div class="container">
+    <div class="title">RSpec, Bro!</div>
+    <div class="subtitle">20 Mar 2019</div>
+    <div class="content is-medium has-text-justified"> <p>Un proverbio dice che chi parte bene è a metà dell’opera. Nulla di più
+vero quando si tratta di dover configurare RSpec da zero. Questa guida
+vuole essere una raccolta di best practice per quanto riguarda il
+bootstrap iniziale di questo framework di test.</p>
+
+<h1 id="gemfile">Gemfile</h1>
+
+<p>Se state utilizzando <strong>Rails on Rails</strong> è sufficiente specificare quanto segue</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Gemfile</span>
+
+<span class="n">group</span> <span class="ss">:development</span><span class="p">,</span> <span class="ss">:test</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s2">"rspec-rails"</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Dopo aver eseguito il <code class="highlighter-rouge">bundle install</code> troverete nel <code class="highlighter-rouge">Gemfile.lock</code> le
+seguenti dipendenze:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rspec-core
+  rspec-support
+rspec-expectations
+  diff-lcs
+  rspec-support
+rspec-mocks
+  diff-lcs
+  rspec-support
+rspec-rails
+  actionpack
+  activesupport
+  railties
+  rspec-core
+  rspec-expectations
+  rspec-mocks
+  rspec-support
+rspec-support
+</code></pre></div></div>
+
+<h1 id="installazione">Installazione</h1>
+
+<p>Eseguire il comando <code class="highlighter-rouge">rails generate rspec:install</code>. Questo comando
+genererà in automatico alcuni file di configurazione:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running via Spring preloader in process 6528
+      create  .rspec
+      create  spec
+      create  spec/spec_helper.rb
+      create  spec/rails_helper.rb
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p><code class="highlighter-rouge">.rspec</code>: è un file di configurazione dei parametri passati
+automaticamente al comando <code class="highlighter-rouge">rspec</code>. I “must have” sono i seguenti:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  --color
+  --format documentation
+  --require spec_helper
+  --warnings
+</code></pre></div>    </div>
+
+    <p>La direttiva <code class="highlighter-rouge">--require spec_helper</code> indica al comando rspec di
+caricare il file <code class="highlighter-rouge">spec_helper.rb</code>. In questo modo, questo file non
+deve essere incluso esplicitamente in nessun file.</p>
+  </li>
+  <li><code class="highlighter-rouge">spec</code>: è la directory dove andrete ad inserire i vostri spec.</li>
+  <li><code class="highlighter-rouge">spec/spec_helper.rb</code> <sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>: è il file che viene incluso in ogni spec e
+serve principalmente per configurare RSpec.</li>
+  <li><code class="highlighter-rouge">spec/rails_helper.rb</code> <sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>: carica le dipendenze di Rails che servono
+per poter lanciare il test.</li>
+</ol>
+
+<h1 id="i-must-have">I “must have”</h1>
+
+<ol>
+  <li><a href="https://github.com/flyerhzm/bullet">Bullet</a>: Notifica l’esistenza
+di query N+1<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>.</li>
+  <li><a href="https://github.com/DatabaseCleaner/database_cleaner">DatabaseCleaner</a>:
+Assicura che il database sia ripulito durante la fase di test</li>
+  <li><a href="https://github.com/thoughtbot/factory_bot_rails">FactoryBotRails</a>:
+Definisce le fixture</li>
+  <li><a href="https://github.com/rubocop-hq/rubocop">Rubocop</a>:
+Analizza il codice sorgente; più comunemente è chiamato lint<sup id="fnref:4"><a href="#fn:4" class="footnote">4</a></sup></li>
+  <li><a href="https://github.com/rubocop-hq/rubocop-rspec">Rubocop-rspec</a>:
+Analizza gli spec</li>
+  <li><a href="https://github.com/thoughtbot/shoulda-matchers">Shoulda-matchers</a>:
+Fornisce degli helper per facilitare i test</li>
+  <li><a href="https://github.com/colszowka/simplecov">Simplecov</a>: E’ uno strumento
+di analisi della copertura del codice sorgente</li>
+  <li><a href="https://github.com/bblimke/webmock">Webmock</a>:
+Utilizzato per lo stub delle richieste HTTP</li>
+  <li><a href="https://github.com/vcr/vcr">Vcr</a>: Registra le iterazioni HTTP durante
+i test riproponendo le risposte in un secondo momento. In questo modo
+si velocizzano i test che necessitano di dialogare con il mondo
+esterno.</li>
+</ol>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Gemfile</span>
+
+<span class="n">group</span> <span class="ss">:development</span><span class="p">,</span> <span class="ss">:test</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s2">"bullet"</span>
+  <span class="n">gem</span> <span class="s2">"factory_bot_rails"</span>
+  <span class="n">gem</span> <span class="s2">"rspec-rails"</span>
+  <span class="n">gem</span> <span class="s2">"rubocop"</span>
+  <span class="n">gem</span> <span class="s2">"rubocop-rspec"</span>
+<span class="k">end</span>
+
+<span class="n">group</span> <span class="ss">:test</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s2">"database_cleaner"</span>
+  <span class="n">gem</span> <span class="s2">"shoulda-matchers"</span>
+  <span class="n">gem</span> <span class="s2">"simplecov"</span><span class="p">,</span> <span class="ss">require: </span><span class="kp">false</span>
+  <span class="n">gem</span> <span class="s2">"vcr"</span>
+  <span class="n">gem</span> <span class="s2">"webmock"</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<h1 id="configurazione-della-suite-di-test">Configurazione della suite di test</h1>
+
+<h2 id="specspec_helperrb">spec/spec_helper.rb</h2>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s2">"simplecov"</span>
+
+<span class="no">RSpec</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">expect_with</span> <span class="ss">:rspec</span> <span class="k">do</span> <span class="o">|</span><span class="n">expectations</span><span class="o">|</span>
+    <span class="n">expectations</span><span class="p">.</span><span class="nf">include_chain_clauses_in_custom_matcher_descriptions</span> <span class="o">=</span> <span class="kp">true</span>
+    <span class="n">expectations</span><span class="p">.</span><span class="nf">syntax</span> <span class="o">=</span> <span class="ss">:expect</span>
+  <span class="k">end</span>
+
+  <span class="n">config</span><span class="p">.</span><span class="nf">mock_with</span> <span class="ss">:rspec</span> <span class="k">do</span> <span class="o">|</span><span class="n">mocks</span><span class="o">|</span>
+    <span class="n">mocks</span><span class="p">.</span><span class="nf">syntax</span> <span class="o">=</span> <span class="ss">:expect</span>
+    <span class="n">mocks</span><span class="p">.</span><span class="nf">verify_partial_doubles</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="k">end</span>
+
+  <span class="n">config</span><span class="p">.</span><span class="nf">shared_context_metadata_behavior</span> <span class="o">=</span> <span class="ss">:apply_to_host_groups</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">order</span> <span class="o">=</span> <span class="ss">:random</span>
+
+  <span class="no">Kernel</span><span class="p">.</span><span class="nf">srand</span> <span class="n">config</span><span class="p">.</span><span class="nf">seed</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h2 id="specrails_helper">spec/rails_helper</h2>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">ENV</span><span class="p">[</span><span class="s2">"RAILS_ENV"</span><span class="p">]</span> <span class="o">||=</span> <span class="s2">"test"</span>
+<span class="nb">require</span> <span class="no">File</span><span class="p">.</span><span class="nf">expand_path</span><span class="p">(</span><span class="s2">"../config/environment"</span><span class="p">,</span> <span class="n">__dir__</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="no">Rails</span><span class="p">.</span><span class="nf">env</span><span class="p">.</span><span class="nf">production?</span>
+  <span class="nb">abort</span><span class="p">(</span><span class="s2">"The Rails environment is running in production mode!"</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="nb">require</span> <span class="s2">"rspec/rails"</span>
+
+<span class="no">Dir</span><span class="p">[</span><span class="no">Rails</span><span class="p">.</span><span class="nf">root</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">"spec"</span><span class="p">,</span> <span class="s2">"support"</span><span class="p">,</span> <span class="s2">"**"</span><span class="p">,</span> <span class="s2">"*.rb"</span><span class="p">)].</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
+  <span class="nb">require</span> <span class="n">file</span>
+<span class="k">end</span>
+
+<span class="k">begin</span>
+  <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span><span class="p">.</span><span class="nf">maintain_test_schema!</span>
+<span class="k">rescue</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">PendingMigrationError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="nb">puts</span> <span class="n">e</span><span class="p">.</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">strip</span>
+  <span class="nb">exit</span> <span class="mi">1</span>
+<span class="k">end</span>
+
+<span class="no">RSpec</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">use_transactional_fixtures</span> <span class="o">=</span> <span class="kp">false</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">infer_spec_type_from_file_location!</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">filter_rails_from_backtrace!</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h1 id="configurazione-delle-gemme">Configurazione delle gemme</h1>
+
+<p>Creiamo la cartella <code class="highlighter-rouge">spec/support</code> e configuriamo in un file separato
+ogni libreria.</p>
+
+<h2 id="databasecleaner--lint-factorybot">DatabaseCleaner / Lint FactoryBot</h2>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># spec/support/database_cleaner.rb</span>
+
+<span class="no">RSpec</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">before</span><span class="p">(</span><span class="ss">:suite</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">DatabaseCleaner</span><span class="p">.</span><span class="nf">clean_with</span><span class="p">(</span><span class="ss">:deletion</span><span class="p">)</span>
+
+    <span class="k">begin</span>
+      <span class="no">DatabaseCleaner</span><span class="p">.</span><span class="nf">start</span>
+      <span class="no">FactoryBot</span><span class="p">.</span><span class="nf">lint</span> <span class="k">if</span> <span class="n">bot_linter?</span>
+    <span class="k">ensure</span>
+      <span class="no">DatabaseCleaner</span><span class="p">.</span><span class="nf">clean</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="n">config</span><span class="p">.</span><span class="nf">before</span> <span class="k">do</span>
+    <span class="no">DatabaseCleaner</span><span class="p">.</span><span class="nf">strategy</span> <span class="o">=</span> <span class="ss">:transaction</span>
+  <span class="k">end</span>
+
+  <span class="n">config</span><span class="p">.</span><span class="nf">before</span> <span class="k">do</span>
+    <span class="no">DatabaseCleaner</span><span class="p">.</span><span class="nf">start</span>
+  <span class="k">end</span>
+
+  <span class="n">config</span><span class="p">.</span><span class="nf">after</span> <span class="k">do</span>
+    <span class="no">DatabaseCleaner</span><span class="p">.</span><span class="nf">clean</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">bot_linter?</span>
+  <span class="no">ENV</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="s2">"RUN_FACTORY_BOT_LINTER"</span><span class="p">,</span> <span class="kp">false</span><span class="p">)</span> <span class="o">||</span>
+    <span class="o">!</span><span class="no">ENV</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="s2">"SKIP_FACTORY_BOT_LINTER"</span><span class="p">,</span> <span class="kp">false</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h2 id="factorybotrails">FactoryBotRails</h2>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># spec/support/factory_bot_rails.rb</span>
+
+<span class="no">RSpec</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">include</span> <span class="no">FactoryBot</span><span class="o">::</span><span class="no">Syntax</span><span class="o">::</span><span class="no">Methods</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h2 id="shouldamatchers">ShouldaMatchers</h2>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># spec/support/shoulda_matchers.rb</span>
+
+<span class="no">Shoulda</span><span class="o">::</span><span class="no">Matchers</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">integrate</span> <span class="k">do</span> <span class="o">|</span><span class="n">with</span><span class="o">|</span>
+    <span class="n">with</span><span class="p">.</span><span class="nf">test_framework</span> <span class="ss">:rspec</span>
+    <span class="n">with</span><span class="p">.</span><span class="nf">library</span> <span class="ss">:rails</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h2 id="simplecov">SimpleCov</h2>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># .simplecov</span>
+
+<span class="no">SimpleCov</span><span class="p">.</span><span class="nf">start</span> <span class="s2">"rails"</span> <span class="k">do</span>
+  <span class="n">add_filter</span> <span class="s2">"/vendor/"</span>
+  <span class="n">add_filter</span> <span class="s2">"/tmp/"</span>
+  <span class="n">add_filter</span> <span class="s2">".bundle/"</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h1 id="note">Note</h1>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="https://github.com/rspec/rspec/wiki">RSpec Wiki</a> <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p><a href="https://github.com/rspec/rspec-rails/blob/master/lib/generators/rspec/install/templates/spec/rails_helper.rb">RSpec rails helper generator</a> <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p><a href="https://www.sitepoint.com/silver-bullet-n1-problem/">Query N+1</a> <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p>Lint, o linter, è uno strumento che analizza il codice sorgente per segnalare errori di programmazione, bug e errori stilistici. <a href="#fnref:4" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    Tags:
+    
+    <span class="tag is-warning is-medium">#<a href="/tag/rspec.html">rspec</a></span>
+    
+    <span class="tag is-warning is-medium">#<a href="/tag/test.html">test</a></span>
+    
+  </div>
+</section>
+
+    </main>
+  </body>
+</html>
