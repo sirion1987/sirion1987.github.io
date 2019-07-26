@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>@sirion1987</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar is-expanded is-transparent is-light">
+  <div class="navbar-brand">
+    <span class="navbar-burger" data-target="NavBarMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+  </div>
+  <div class="navbar-menu" id="NavBarMenu">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <a class="link" href="/">Home</a>
+      </div>
+      <div class="navbar-item">
+        <a class="link" href="/posts">Post</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    </header>
+    <main>
+      <section class="section">
+  <div class="container">
+    <div class="title">Rails & Webpacker & React</div>
+    <div class="subtitle">26 Jul 2019</div>
+    <div class="content is-medium has-text-justified"> <p>Per poter creare un’applicazione React è necessario includere all’interno del progetto la libreria
+<code class="highlighter-rouge">Webpacker</code>. L’obiettivo di Webpacker è quello di semplificare l’utilizzo del pre-processore JavaScript e del bundler webpack all’interno di Rails. E’ possible utilizzarlo in concomitanza con l’asset pipeline di Rails.</p>
+
+<h3 id="installazione-e-configurazione-di-webpack">Installazione<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> e configurazione<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup> di Webpack</h3>
+
+<p>Per includere la libreria nel <code class="highlighter-rouge">Gemfile</code> è sufficiente eseguire il comando <code class="highlighter-rouge">bundle add webpacker</code>.
+Successivamente possiamo installare webpacker con <code class="highlighter-rouge">bundle exec rails webpacker:install</code>. Verrà configurato:</p>
+
+<ul>
+  <li>un file di configurazione <code class="highlighter-rouge">webpacker.yml</code>;</li>
+  <li>le configurazioni dei vari ambienti di sviluppo (development, production e test);</li>
+  <li>creazione di una directory <code class="highlighter-rouge">app/javascript/packs</code> con all’interno il file <code class="highlighter-rouge">application.js</code>;</li>
+  <li>alcuni eseguibili all’interno di <code class="highlighter-rouge">bin</code>.</li>
+</ul>
+
+<h3 id="in-azione">In azione</h3>
+
+<p>Per prima cosa dobbiamo creare un nuovo controller con un’azione, ad esempio, <code class="highlighter-rouge">pages#home</code> con
+il comando <code class="highlighter-rouge">rails generate controller pages home</code>. Successivamente configuriamo il router di Rails impostanto url di default:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#config/routes</span>
+
+<span class="o">...</span>
+<span class="n">root</span> <span class="n">to</span><span class="ss">:"pages#home"</span>
+<span class="o">...</span>
+</code></pre></div></div>
+
+<p>Modifichiamo l’application layout:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># app/views/layouts/application.html.erb</span>
+
+<span class="o">...</span>
+<span class="o">&lt;</span><span class="sx">%= javascript_pack_tag ’application’ %&gt;
+...
+</span></code></pre></div></div>
+
+<p>Questo comando include il file pre-buildato <code class="highlighter-rouge">application-{hash}.js</code> all’interno della nostro layout.
+Per poter buildare i vari file JavaScript presenti all’interno della cartella <code class="highlighter-rouge">app/javascript/packs</code> è necessario eseguire il comando <code class="highlighter-rouge">bin/webpack-dev-server</code>.</p>
+
+<p>Lanciando il comando <code class="highlighter-rouge">bin/webpack-dev-server</code> e <code class="highlighter-rouge">bundle exec rails server</code>, se la configurazione è andata a buon fine, dovremmo vedere nella console del browser il messaggio “Hello World from Webpacker”.</p>
+
+<p><img src="./img/1.png" alt="" /></p>
+
+<h1 id="note">Note</h1>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="https://github.com/rails/webpacker#installation">Install Webpacker</a>. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p><a href="https://github.com/rails/webpacker#webpack-configuration">Config Webpacker</a> <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    Tags:
+    
+    <span class="tag is-warning is-medium">#<a href="/tag/rails.html">rails</a></span>
+    
+    <span class="tag is-warning is-medium">#<a href="/tag/webpacker.html">webpacker</a></span>
+    
+    <span class="tag is-warning is-medium">#<a href="/tag/react.html">react</a></span>
+    
+  </div>
+</section>
+
+    </main>
+  </body>
+</html>
