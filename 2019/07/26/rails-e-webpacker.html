@@ -45,7 +45,27 @@ utilizzarlo in concomitanza con l’asset pipeline di Rails.</p>
 
 <p>Per includere la libreria nel <code class="highlighter-rouge">Gemfile</code> è sufficiente eseguire il
 comando <code class="highlighter-rouge">bundle add webpacker</code>. Successivamente possiamo installare
-webpacker con <code class="highlighter-rouge">bundle exec rails webpacker:install</code>. Verrà configurato:</p>
+webpacker con</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle <span class="nb">exec </span>rails webpacker:install
+
+    create config/webpacker.yml
+Copying webpack core config
+    create config/webpack
+    create config/webpack/development.js
+    create config/webpack/environment.js
+    create config/webpack/production.js
+    create config/webpack/test.js
+Creating JavaScript app <span class="nb">source </span>directory
+    create app/javascript
+    create app/javascript/packs/application.js
+Copying binstubs
+    exist  bin
+    create bin/webpack
+    create bin/webpack-dev-server
+</code></pre></div></div>
+
+<p>Verrà configurato:</p>
 
 <ul>
   <li>un file di configurazione <code class="highlighter-rouge">webpacker.yml</code>;</li>
@@ -59,7 +79,7 @@ webpacker con <code class="highlighter-rouge">bundle exec rails webpacker:instal
 <p>Per prima cosa dobbiamo creare un nuovo controller con un’azione, ad
 esempio, <code class="highlighter-rouge">pages#home</code> con il comando:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails generate controller pages home
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>rails generate controller pages home
 </code></pre></div></div>
 
 <p>Successivamente configuriamo il router di Rails impostanto <strong>url di default</strong>:</p>
