@@ -33,7 +33,7 @@
     <main>
       <section class="section">
   <div class="container">
-    <div class="title">Rails & Webpacker & React</div>
+    <div class="title">Rails, Webpacker & React</div>
     <div class="subtitle">26 Jul 2019</div>
     <div class="content is-medium has-text-justified"> <p>Per poter creare un’applicazione React è necessario includere
 all’interno del progetto la libreria <code class="highlighter-rouge">Webpacker</code>. L’obiettivo di
@@ -65,7 +65,7 @@ Copying binstubs
     create bin/webpack-dev-server
 </code></pre></div></div>
 
-<p>Verrà configurato:</p>
+<p>Al termine dell’operazione, avremo:</p>
 
 <ul>
   <li>un file di configurazione <code class="highlighter-rouge">webpacker.yml</code>;</li>
@@ -111,6 +111,92 @@ dovremmo vedere nella console del browser il messaggio “Hello World
 from Webpacker”.</p>
 
 <p><img src="/assets/images/reails-e-webpacker-1.png" alt="Check" class="has-image-centered" /></p>
+
+<h3 id="configurazione-di-react">Configurazione di React</h3>
+
+<p>Per poter utilizzare installare e configurare React è sufficiente
+lanciare:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bundle <span class="nb">exec </span>rails webpacker:install:react
+
+Copying babel.config.js to app root directory
+    force  babel.config.js
+Copying react example entry file to app/javascript/packs
+    create  app/javascript/packs/hello_react.jsx
+Updating webpack paths to include .jsx file extension
+    insert  config/webpacker.yml
+Installing all react dependencies
+    run yarn add <span class="se">\</span>
+        react react-dom <span class="se">\</span>
+        @babel/preset-react <span class="se">\</span>
+        prop-types <span class="se">\</span>
+        babel-plugin-transform-react-remove-prop-types from <span class="s2">"."</span>
+</code></pre></div></div>
+
+<p>Dopo l’installazione verrà creato un file di default <code class="highlighter-rouge">hello_react.jsx</code>
+nella cartella <code class="highlighter-rouge">app/javascript/packs/</code>.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="s1">'react'</span>
+<span class="k">import</span> <span class="nx">ReactDOM</span> <span class="k">from</span> <span class="s1">'react-dom'</span>
+<span class="k">import</span> <span class="nx">PropTypes</span> <span class="k">from</span> <span class="s1">'prop-types'</span>
+
+<span class="kd">const</span> <span class="nx">Hello</span> <span class="o">=</span> <span class="nx">props</span> <span class="o">=&gt;</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Hello <span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span>!<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">)</span>
+
+<span class="nx">Hello</span><span class="p">.</span><span class="nx">defaultProps</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s1">'David'</span>
+<span class="p">}</span>
+
+<span class="nx">Hello</span><span class="p">.</span><span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span>
+<span class="p">}</span>
+
+<span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'DOMContentLoaded'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Hello</span> <span class="na">name=</span><span class="s2">"React"</span> <span class="p">/&gt;,</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'div'</span><span class="p">)),</span>
+  <span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>Ed all’interno della vista <code class="highlighter-rouge">home</code> aggiungiamo il nuovo “pack”:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># app/views/pages/home.html.erb</span>
+
+<span class="o">...</span>
+<span class="o">&lt;</span><span class="sx">%= javascript_pack_tag 'hello_react' %&gt;
+...
+</span></code></pre></div></div>
+
+<p><img src="/assets/images/reails-e-webpacker-2.png" alt="Check" class="has-image-centered" /></p>
+
+<h3 id="compilazione-degli-asset-di-webpack">Compilazione degli asset di webpack</h3>
+
+<p>E’ possibile fornire gli asset generati da webpack in due modalità:</p>
+
+<ul>
+  <li>
+    <p><strong>Statico</strong>: utilizziamo il comando <code class="highlighter-rouge">bundle exec rails assets:precompile</code>.
+In questo modo la build sarà fornita nella directory <code class="highlighter-rouge">public/packs/js</code>.</p>
+  </li>
+  <li>
+    <p><strong>Dinamico</strong>: utilizzando l’eseguibile: <code class="highlighter-rouge">bin/webpack-dev-server</code>. In
+questa modalità sarà eseguito un server (raggiungibile all’indirizzo
+http://localhost:3035/) che fornirà i file senza salvarli su disco.
+In questa modalità è possibile usufruire dell’hot reload.</p>
+  </li>
+</ul>
+
+<p>Se non fosse disponibile né il server né la cartella <code class="highlighter-rouge">public/packs</code>
+verranno in ogni caso compilati gli asset.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application <span class="o">(</span>0.5ms<span class="o">)</span>
+<span class="o">[</span>Webpacker] Compiling…
+<span class="o">[</span>Webpacker] Compiled all packs <span class="k">in</span> /home/sirion1987/Work/Off/prova1/public/packs
+</code></pre></div></div>
 
 <h1 id="note">Note</h1>
 
