@@ -17,7 +17,28 @@ utilizzarlo in concomitanza con l'asset pipeline di Rails.
 
 Per includere la libreria nel `Gemfile` è sufficiente eseguire il
 comando `bundle add webpacker`. Successivamente possiamo installare
-webpacker con `bundle exec rails webpacker:install`. Verrà configurato:
+webpacker con
+
+```bash
+bundle exec rails webpacker:install
+
+    create config/webpacker.yml
+Copying webpack core config
+    create config/webpack
+    create config/webpack/development.js
+    create config/webpack/environment.js
+    create config/webpack/production.js
+    create config/webpack/test.js
+Creating JavaScript app source directory
+    create app/javascript
+    create app/javascript/packs/application.js
+Copying binstubs
+    exist  bin
+    create bin/webpack
+    create bin/webpack-dev-server
+```
+
+Verrà configurato:
 
 * un file di configurazione `webpacker.yml`;
 * le configurazioni dei vari ambienti di sviluppo (development, production e test);
@@ -30,7 +51,7 @@ Per prima cosa dobbiamo creare un nuovo controller con un'azione, ad
 esempio, `pages#home` con il comando:
 
 ```bash
-rails generate controller pages home
+$ rails generate controller pages home
 ```
 
 Successivamente configuriamo il router di Rails impostanto __url di default__:
