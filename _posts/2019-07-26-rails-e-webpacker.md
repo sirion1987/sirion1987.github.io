@@ -85,7 +85,7 @@ dovremmo vedere nella console del browser il messaggio "Hello World
 from Webpacker".
 
 
-![](./img/1.png)
+![Check](/assets/images/reails-e-webpacker-1.png)
 
 # Note
 
