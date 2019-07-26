@@ -85,7 +85,7 @@ dovremmo vedere nella console del browser il messaggio "Hello World
 from Webpacker".
 
 
-![Check](/assets/images/reails-e-webpacker-1.png){.has-image-centered}
+![Check](/assets/images/reails-e-webpacker-1.png){:.has-image-centered}
 
 # Note
 
